@@ -85,9 +85,16 @@ export function startTyping() {
     }
   };
 
-  handleMobileInput = function (e) {
-    hiddenInput.value = ""; 
-  }
+    handleMobileInput = function (e) {
+    if (e.inputType === "deleteContentBackward") {
+      processBackspace();
+    } else if (e.data) {
+      for (let char of e.data) {
+        processChar(char);
+      }
+    }
+    hiddenInput.value = "";
+  };
 
   if (hiddenInput) {
     hiddenInput.addEventListener("keydown", handleTyping);
